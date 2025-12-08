@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api import auth
 
 app = FastAPI(
-    title="Reservation System API",
+    title="예약 시스템 API",
     description="레스토랑/병원 예약 시스템",
     version="1.0.0"
 )
@@ -15,6 +16,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 라우터 등록
+app.include_router(auth.router)
 
 
 @app.get("/")
